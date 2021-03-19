@@ -1,30 +1,34 @@
 ﻿using ErrorSolutionPortal.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ErrorSolutionPortal.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController
+        : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        // private readonly IErrorManager errorRepo;
+        //added for errormgr
+        public HomeController(
+            ILogger<HomeController> logger)
+            //,
+            //IErrorManager errorRepo)
         {
             _logger = logger;
+         //   this.errorRepo = errorRepo;
         }
 
         public IActionResult Index()
         {
+            //return errorRepo.GetById(Id).Solution;
             return View();
         }
 
         public IActionResult Privacy()
         {
+
             return View();
         }
 

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using ErrorSolutionPortal.Application;
 
 namespace ErrorSolutionPortal
 {
@@ -19,13 +20,13 @@ namespace ErrorSolutionPortal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //for dependency injection 
+            //for dependency injection installed EF sqlserver package
             services.AddDbContext<ErrorSolutionDbContext>(
                 options => options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")
-                  //,  sqlServerOptions => sqlServerOptions.MigrationsAssembly("UKCCM.Project.Migrations")
+                    Configuration.GetConnectionString("DefaultConnection"),
+                    sqlServerOptions => sqlServerOptions.MigrationsAssembly("Migrations")
                 ));
-
+            services.ConfigApplicationDependency();
             services.AddControllers();
             services.AddControllersWithViews();
         }
