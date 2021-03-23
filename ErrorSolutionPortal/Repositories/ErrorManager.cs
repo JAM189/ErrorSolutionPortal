@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ErrorSolutionPortal.Entities;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,5 +15,11 @@ namespace ErrorSolutionPortal.Repositories
              IUnitOfWork unitOfWork
             ) : base(unitOfWork)
         { }
+
+        public async Task<IEnumerable<ErrorSolution>> Get(string spName, params object[] parameters)
+        {
+            var result = unitOfWork.Context.Set<ErrorSolution>().FromSqlRaw($"EXECUTE {spName}", parameters);
+            return result.AsEnumerable<ErrorSolution>();
+        }
     }
 }

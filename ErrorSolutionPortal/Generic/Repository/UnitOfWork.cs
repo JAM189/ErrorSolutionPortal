@@ -6,7 +6,9 @@ namespace ErrorSolutionPortal
     {
         public ErrorSolutionDbContext Context { get; }
 
-        public UnitOfWork(ErrorSolutionDbContext context)
+        public UnitOfWork(
+            ErrorSolutionDbContext context
+            )
         {
             Context = context;
         }

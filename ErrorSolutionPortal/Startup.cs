@@ -23,11 +23,12 @@ namespace ErrorSolutionPortal
             //for dependency injection installed EF sqlserver package
             services.AddDbContext<ErrorSolutionDbContext>(
                 options => options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection"),
-                    sqlServerOptions => sqlServerOptions.MigrationsAssembly("Migrations")
+                    Configuration.GetConnectionString("DefaultConnection")
                 ));
+
             services.ConfigApplicationDependency();
             services.AddControllers();
+            services.AddMemoryCache();
             services.AddControllersWithViews();
         }
 

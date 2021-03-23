@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ErrorSolutionPortal
 {
     public class ErrorSolutionDbContext
-      : DbContext
+        : DbContext
     {
         public ErrorSolutionDbContext(
             DbContextOptions<ErrorSolutionDbContext> options

@@ -5,8 +5,6 @@ namespace ErrorSolutionPortal
 {
     public interface ICrudAppService<TDto, TPrimaryKey>
     {
-        Task<IEnumerable<TDto>> Get();
-
         Task<TDto> Get(TPrimaryKey id);
 
         Task Create(TDto tDto);

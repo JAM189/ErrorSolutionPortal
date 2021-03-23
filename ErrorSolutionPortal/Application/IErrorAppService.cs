@@ -1,11 +1,13 @@
 ﻿using ErrorSolutionPortal.Entities;
+using ErrorSolutionPortal.Models;
 using System;
+using System.Threading.Tasks;
 
 namespace ErrorSolutionPortal.Application
 {
     public interface IErrorAppService
          : ICrudAppService<ErrorSolution, Guid>
     {
-        //search get
+        Task<SearchResult> Get(SearchModel search);
     }
 }

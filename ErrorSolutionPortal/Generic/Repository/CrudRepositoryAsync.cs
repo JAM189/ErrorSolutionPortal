@@ -5,17 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-//using ErrorSolutionPortal.Entities;
 
 namespace ErrorSolutionPortal
 {
-    public abstract class CrudAsyncRepository<TEntity, TPrimaryKey>
+    public abstract class CrudRepositoryAsync<TEntity, TPrimaryKey>
         : ICrudRepository<TEntity, TPrimaryKey> where TEntity : class
     {
-        protected IUnitOfWork unitOfWork; 
+        protected IUnitOfWork unitOfWork;
         internal DbSet<TEntity> dbSet;
 
-        public CrudAsyncRepository(IUnitOfWork unitOfWork)
+        public CrudRepositoryAsync(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
             this.dbSet = unitOfWork.Context.Set<TEntity>();
@@ -50,7 +49,6 @@ namespace ErrorSolutionPortal
         }
 
         public virtual async Task<TEntity> GetFirstOrDefault<TResult>(
-            //Expression<Func<TEntity, TResult>> selector,
             Expression<Func<TEntity, bool>> predicate = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null,
@@ -124,7 +122,7 @@ namespace ErrorSolutionPortal
         public virtual async Task Delete(TPrimaryKey id)
         {
             TEntity entityToDelete = dbSet.Find(id);
-            if(entityToDelete is ISoftDeleteEntity<TPrimaryKey>)
+            if (entityToDelete is ISoftDeleteEntity<TPrimaryKey>)
             {
                 ((ISoftDeleteEntity<TPrimaryKey>)entityToDelete).IsDeleted = true;
                 dbSet.Attach(entityToDelete);
