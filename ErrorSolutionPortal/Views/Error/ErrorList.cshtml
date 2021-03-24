@@ -1,0 +1,23 @@
+﻿@model IList<ErrorSolutionPortal.Entities.ErrorSolution>
+
+<table id="error-searchResult" class="display table table-bordered display" cellspacing="0" width="100%">
+    <thead class="thead-dark text-uppercase text-white">
+        <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Solution</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td></td>
+                <td><a href="@Url.Action("Get", "Error", new { key = item.Id.ToString("N") })">@item.Name</a></td>
+                <td>@item.Description</td>
+                <td>@item.Solution</td>
+            </tr>
+        }
+    </tbody>
+</table>

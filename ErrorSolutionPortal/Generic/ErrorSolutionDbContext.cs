@@ -11,6 +11,6 @@ namespace ErrorSolutionPortal
             ) : base(options)
         { }
 
-        public DbSet<ErrorSolution> ErrorSolutions { get; set; }
+        public DbSet<ErrorSolution> Errors { get; set; }
     }
 }

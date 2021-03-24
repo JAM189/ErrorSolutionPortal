@@ -43,15 +43,12 @@ namespace ErrorSolutionPortal.Application
 
             searchResult.Data = errors;
 
-            searchResult.RecordsTotal = 100;
-            searchResult.RecordsFiltered = 28;
-
             return searchResult;
         }
 
         public async Task<ErrorSolution> Get(Guid id)
         {
-            var e = await errorRepo.GetFirstOrDefault<ErrorSolution>();
+            var e = await errorRepo.GetByProp(x => x.Id == id);
             return e;
         }
 

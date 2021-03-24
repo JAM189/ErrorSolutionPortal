@@ -3,6 +3,7 @@ using ErrorSolutionPortal.Entities;
 using ErrorSolutionPortal.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ErrorSolutionPortal.Controllers
@@ -25,10 +26,18 @@ namespace ErrorSolutionPortal.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<SearchResult> GetAll(SearchModel search)
+        [HttpGet]
+        public async Task<IActionResult> Get(string key)
         {
-            return await errorAppService.Get(search);
+            var error = await errorAppService.Get(Guid.ParseExact(key, "N"));
+            return View(error);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll(SearchModel search)
+        {
+            var searchResult =  await errorAppService.Get(search);
+            return PartialView("ErrorList", searchResult.Data.ToList());
         }
 
         [HttpGet]
@@ -44,9 +53,10 @@ namespace ErrorSolutionPortal.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit()
+        public IActionResult Edit(string key)
         {
-            throw new NotImplementedException();
+            var error = errorAppService.Get(Guid.ParseExact(key, "N"));
+            return View(error);
         }
 
         [HttpPost]
