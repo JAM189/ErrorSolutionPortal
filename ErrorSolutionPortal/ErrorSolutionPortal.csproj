@@ -7,6 +7,7 @@
   <ItemGroup>
     <Compile Remove="Application\ProjectController.cs" />
     <Compile Remove="Application\ProjectControllerBase.cs" />
+    <Compile Remove="ErrorController.cs" />
   </ItemGroup>
 
   <ItemGroup>

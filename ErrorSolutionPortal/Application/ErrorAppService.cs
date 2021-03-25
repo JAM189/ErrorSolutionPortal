@@ -3,7 +3,6 @@ using ErrorSolutionPortal.Models;
 using ErrorSolutionPortal.Repositories;
 using Microsoft.Data.SqlClient;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ErrorSolutionPortal.Application

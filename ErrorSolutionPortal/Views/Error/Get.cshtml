@@ -3,29 +3,28 @@
 @{
     ViewData["Title"] = "Get";
 }
-<h1>
-    Error :
-    <br />@Model.Name
-</h1>
+<h1>@Model.Name</h1>
 
 <div role="form">
     <div>
         <fieldset>
-            @*<div class="form-group">
-                <label for="txtProcess">Name: </label>
-                @Html.DisplayFor(m => m.Name, new { @class = "form-control" })
-            </div>*@
+                @*<div class="form-group">
+                    <label for="txtProcess">Name: </label>
+                    @Html.DisplayFor(m => m.Name, new { @class = "form-control" })
+                </div>*@
             <div class="form-group">
-                <label for="txtProcess">Description: </label>
+                <label for="txtProcess"><b>Description: </b></label>
                 @Html.DisplayFor(m => m.Description, new { @class = "form-control" })
             </div>
             <div class="form-group">
-                <label for="txtProcess">Solutions: </label>
+                <label for="txtProcess"><b>Solutions: </b></label>
                 @Html.DisplayFor(m => m.Solution, new { @class = "form-control" })
             </div>
             <div class="form-group">
-                <button type="button" class="btn btn-primary directory-search">Ok</button>
-                <button type="button" class="btn btn-secondary directory-reset">Cancel</button>
+                @*<button type="button" class="btn btn-primary directory-search">Back</button>*@
+                @*@if (Request.UrlReferrer != null)*@ 
+                <a class="btn btn-primary" role="button" onclick="history.go(-1); return false;" href="#">Back</a>
+                <button type="button" class="btn btn-secondary directory-reset">Next</button>
             </div>
         </fieldset>
     </div>
