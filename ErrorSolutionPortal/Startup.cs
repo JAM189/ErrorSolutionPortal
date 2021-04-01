@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using ErrorSolutionPortal.Application;
+using Microsoft.Extensions.Logging;
+using System.IO;
 
 namespace ErrorSolutionPortal
 {
@@ -30,10 +32,22 @@ namespace ErrorSolutionPortal
             services.AddControllers();
             services.AddMemoryCache();
             services.AddControllersWithViews();
+
+            //Authenti=cation logic
+            app.UseCookieAuthentication(options =>
+            {
+                options.AutomaticAuthenticate = true;
+                options.AutomaticChallenge = true;
+                options.LoginPath = "/Account/Login";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(
+            IApplicationBuilder app,
+            IWebHostEnvironment env,
+            ILoggerFactory loggerFactory
+            )
         {
             if (env.IsDevelopment())
             {
@@ -56,8 +70,10 @@ namespace ErrorSolutionPortal
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Error}/{action=Index}/{id?}");
             });
+
+            loggerFactory.AddFile($"{Directory.GetCurrentDirectory()}\\Logs\\ErrorSolution.txt");
         }
     }
 }

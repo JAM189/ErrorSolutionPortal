@@ -22,9 +22,11 @@
             </div>
             <div class="form-group">
                 @*<button type="button" class="btn btn-primary directory-search">Back</button>*@
-                @*@if (Request.UrlReferrer != null)*@ 
+                @*@if (Request.UrlReferrer != null)*@
                 <a class="btn btn-primary" role="button" onclick="history.go(-1); return false;" href="#">Back</a>
-                <button type="button" class="btn btn-secondary directory-reset">Next</button>
+                <a class="btn btn-primary" role="button" onclick="history.go(-1); return false;" href="#">Next</a>
+                <a class="btn btn-primary" role="button" href="@Url.Action("Edit", "Error", new { key = Model.Id.ToString("N") })">Edit</a>
+                @*<button type="button" class="btn btn-secondary directory-reset">Next</button>*@
             </div>
         </fieldset>
     </div>

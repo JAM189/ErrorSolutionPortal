@@ -1,0 +1,3 @@
+2021-03-26T16:37:54.2155412+05:30  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-03-26T16:37:54.3258320+05:30  [INF] Hosting environment: "Development" (c3307c92)
+2021-03-26T16:37:54.3383471+05:30  [INF] Content root path: "C:\Users\hp\source\repos\ErrorSolutionPortal\ErrorSolutionPortal" (b5d60022)

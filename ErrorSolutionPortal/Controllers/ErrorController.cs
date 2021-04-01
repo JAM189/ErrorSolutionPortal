@@ -1,6 +1,7 @@
 ﻿using ErrorSolutionPortal.Application;
 using ErrorSolutionPortal.Entities;
 using ErrorSolutionPortal.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace ErrorSolutionPortal.Controllers
 {
+    [Authorize]
     public class ErrorController
         : Controller
     {
@@ -36,33 +38,35 @@ namespace ErrorSolutionPortal.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll(SearchModel search)
         {
-            var searchResult =  await errorAppService.Get(search);
+            var searchResult = await errorAppService.Get(search);
             return PartialView("ErrorList", searchResult.Data.ToList());
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            throw new NotImplementedException();
+            return View(new ErrorSolution());
         }
 
         [HttpPost]
-        public IActionResult Create(ErrorSolution error)
+        public async Task<IActionResult> Create(ErrorSolution error)
         {
-            throw new NotImplementedException();
+            await errorAppService.Create(error);
+            return RedirectToAction("Index", "Error");
         }
 
         [HttpGet]
-        public IActionResult Edit(string key)
+        public async Task<IActionResult> Edit(string key)
         {
-            var error = errorAppService.Get(Guid.ParseExact(key, "N"));
+            var error = await errorAppService.Get(Guid.ParseExact(key, "N"));
             return View(error);
         }
 
         [HttpPost]
-        public IActionResult Edit(ErrorSolution error)
+        public async Task<IActionResult> Edit(ErrorSolution error)
         {
-            throw new NotImplementedException();
+            await errorAppService.Update(error);
+            return RedirectToAction("Index", "Error");
         }
     }
 }

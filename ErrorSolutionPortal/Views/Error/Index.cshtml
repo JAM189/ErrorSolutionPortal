@@ -61,7 +61,8 @@
             searchErrors();
         });
 
-        searchErrors();
+        //To enable to load the Errors on the start up screen, uncomment this line
+        //searchErrors();
     });
 
     var searchErrors = function () {
@@ -87,7 +88,8 @@
             </div>
             <div class="form-group">
                 <button id="error-search-button" type="button" class="btn btn-primary directory-search">Search</button>
-                <button type="button" class="btn btn-secondary directory-reset">Refresh</button>
+                <a class="btn btn-primary" role="button" href="@Url.Action("Create", "Error")">Add</a>
+                @*<button type="button" class="btn btn-secondary directory-reset">Refresh</button>*@
             </div>
         </fieldset>
     </div>

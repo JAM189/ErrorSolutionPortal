@@ -1,0 +1,35 @@
+﻿@model ErrorSolutionPortal.Entities.ErrorSolution
+
+@{
+    ViewData["Title"] = "Create";
+}
+<h1>Create new error and solution</h1>
+
+<form asp-controller="Error" asp-action="Edit">
+    <div>
+        <fieldset>
+            <div class="form-group">
+                <label for="txtProcess">Name: </label>
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                @Html.HiddenFor(m => m.Id)
+            </div>
+            <div class="form-group">
+                <label for="txtKeyword">Description: </label>
+                @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="txtStatus">Solution: </label>
+                @Html.TextAreaFor(m => m.Solution, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Solution, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button class="btn btn-secondary directory-reset">Reset</button>
+                <a class="btn btn-primary" role="button" onclick="history.go(-1); return false;" href="#">Back</a><br />
+            </div>
+        </fieldset>
+    </div>
+</form>
+<script type="text/javascript">
+</script>
