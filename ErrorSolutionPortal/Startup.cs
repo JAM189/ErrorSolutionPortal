@@ -4,9 +4,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-using ErrorSolutionPortal.Application;
 using Microsoft.Extensions.Logging;
 using System.IO;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 
 namespace ErrorSolutionPortal
 {
@@ -33,13 +34,8 @@ namespace ErrorSolutionPortal
             services.AddMemoryCache();
             services.AddControllersWithViews();
 
-            //Authenti=cation logic
-            app.UseCookieAuthentication(options =>
-            {
-                options.AutomaticAuthenticate = true;
-                options.AutomaticChallenge = true;
-                options.LoginPath = "/Account/Login";
-            });
+            //
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,16 +60,26 @@ namespace ErrorSolutionPortal
 
             app.UseRouting();
 
+            //Authenti=cation logic
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Error}/{action=Index}/{id?}");
+                    pattern: "{controller=Error}/{action=Index}/{id?}"
+                    );
             });
 
             loggerFactory.AddFile($"{Directory.GetCurrentDirectory()}\\Logs\\ErrorSolution.txt");
+
+            var cookiePolicyOptions = new CookiePolicyOptions
+            {
+                MinimumSameSitePolicy = SameSiteMode.Strict,
+            };
+
+            app.UseCookiePolicy(cookiePolicyOptions);
         }
     }
 }
